@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
           <div className="container">
             <p style={{ margin: "0 0 4px" }}>
               <strong>EVD Ocular Explorer</strong> — companion to a systematic review of ocular complications in
-              Ebola virus disease survivors. All values derive from the corrected, source-verified dataset (53 studies).
+              Ebola virus disease survivors. All values derive from the source-verified dataset (53 studies).
             </p>
             <p style={{ margin: 0 }} className="faint">
               Prevalence estimates use Freeman–Tukey double-arcsine transformation with DerSimonian–Laird random

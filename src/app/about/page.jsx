@@ -35,9 +35,9 @@ export default function AboutPage() {
 
       <h2>Data provenance</h2>
       <p>
-        Every value shown is generated at build time from the corrected, source-verified analysis dataset
-        (<code>meta_clean_corrected.csv</code> and the appraisal appendices) — the same files behind the manuscript
-        tables. The site performs no live queries and contains no free-text generation: the search and filters only ever
+        Every value shown is generated at build time from the source-verified analysis dataset and the appraisal
+        appendices — the same data behind the manuscript tables. The site performs no live queries and contains no
+        free-text generation: the search and filters only ever
         surface rows that exist in that dataset, so nothing displayed here can drift from the underlying data.
       </p>
 

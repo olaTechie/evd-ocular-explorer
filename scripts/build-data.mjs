@@ -232,11 +232,11 @@ function describeFigure(f) {
   const STATIC = {
     "eFigure_forest_tier1_by_outcome": { type: "Forest — Tier 1 by outcome", group: "By outcome", outcome: "Tier 1 (all)", tier: 1, caption: "Tier 1 vision-threatening outcomes: study-level prevalence with pooled diamond per outcome." },
     "eFigure_forest_tier2_by_outcome": { type: "Forest — Tier 2 by outcome", group: "By outcome", outcome: "Tier 2 (all)", tier: 2, caption: "Tier 2 anatomically-defined outcomes: study-level prevalence with pooled diamond per outcome." },
-    "forest_pooled_summary_corrected": { type: "Summary forest", group: "Overview", outcome: "All outcomes", tier: null, caption: "Pooled prevalence for all outcomes (corrected analysis)." },
-    "forest_uveitis_subgroup_corrected": { type: "Subgroup forest", group: "Overview", outcome: "Uveitis (any)", tier: 1, caption: "Uveitis (any) by subgroup (corrected analysis)." },
-    "funnel_plots_corrected": { type: "Funnel plot", group: "Diagnostics", outcome: "Publication bias", tier: null, caption: "Funnel plots for small-study effects (corrected analysis)." },
-    "leaveoneout_plots_corrected": { type: "Leave-one-out", group: "Diagnostics", outcome: "Influence", tier: null, caption: "Leave-one-out sensitivity (corrected analysis)." },
-    "reml_metaregression_figure_corrected": { type: "Meta-regression", group: "Diagnostics", outcome: "Examiner gradient", tier: null, caption: "REML meta-regression of uveitis prevalence on examiner type (corrected)." },
+    "forest_pooled_summary": { type: "Summary forest", group: "Overview", outcome: "All outcomes", tier: null, caption: "Pooled prevalence for all outcomes." },
+    "forest_uveitis_subgroup": { type: "Subgroup forest", group: "Overview", outcome: "Uveitis (any)", tier: 1, caption: "Uveitis (any) by subgroup." },
+    "funnel_plots": { type: "Funnel plot", group: "Diagnostics", outcome: "Publication bias", tier: null, caption: "Funnel plots for small-study effects." },
+    "leaveoneout_plots": { type: "Leave-one-out", group: "Diagnostics", outcome: "Influence", tier: null, caption: "Leave-one-out sensitivity." },
+    "reml_metaregression_figure": { type: "Meta-regression", group: "Diagnostics", outcome: "Examiner gradient", tier: null, caption: "REML meta-regression of uveitis prevalence on examiner type." },
     "prisma_flow_figure": { type: "PRISMA flow", group: "Overview", outcome: "Study selection", tier: null, caption: "PRISMA 2020 flow diagram: 53 included studies." },
   };
   return { file: f, ...(STATIC[base] || { type: "Figure", group: "Other", outcome: base, tier: null, caption: base }) };
