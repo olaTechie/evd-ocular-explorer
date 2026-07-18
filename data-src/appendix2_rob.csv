@@ -1,0 +1,54 @@
+Study_ID,First_Author,Year,Country,Study_Design,RoB_Tool,Q1: Sample frame,Q2: Sampling method,Q3: Sample size,Q4: Subjects described,Q5: Data analysis,Q6: Standard criteria,Q7: Reliable measurement,Q8: Statistical analysis,Q9: Response rate,JBI Total Score,Overall RoB,Notes
+S01,Bwaka,1999,Democratic Republic of the Congo,cross-sectional,JBI Prevalence,Yes,No,No,Yes,Yes,No,Unclear,Yes,Unclear,4/9,Moderate,Q6/Q7 scored 'No': no ophthalmic examination (self-report/none) — ocular condition not validly/reliably measured
+S02,Kaweesa,2025,Uganda,cross-sectional,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,No,Unclear,Yes,Unclear,5/9,Moderate,
+S03,Clark,2015,Uganda,case series,JBI Prevalence,Unclear,Unclear,No,Yes,Unclear,No,Unclear,Yes,Unclear,2/9,High,
+S04,Shantha,2022,Sierra Leone,cross-sectional,JBI Prevalence,Yes,Unclear,No,Yes,Yes,No,No,Yes,Unclear,4/9,Moderate,
+S05,Amuzu,2021,Sierra Leone,retrospective cohort,JBI Prevalence,Yes,Yes,Yes,Yes,Yes,No,Unclear,Yes,Yes,7/9,Moderate,
+S06,Balendra,2023,Sierra Leone,cross-sectional,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,No,Unclear,Yes,Yes,6/9,Moderate,
+S07,Bates,2024,Sierra Leone,cross-sectional,JBI Prevalence,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,7/9,Moderate,Q6/Q7 scored 'No': no ophthalmic examination (self-report/none) — ocular condition not validly/reliably measured
+S08,Choo,2024,Sierra Leone,cross-sectional,JBI Prevalence,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,8/9,Moderate,
+S09,Diallo,2021,Guinea,prospective cohort,JBI Prevalence,Yes,Yes,Yes,Yes,Yes,Unclear,Unclear,Yes,Yes,7/9,Low,
+S10,Etard,2017,Guinea,Prospective multicentre open cohort (observational multidisciplinary),JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,Unclear,Yes,Yes,Yes,7/9,Low-Moderate,
+S11,Kelly,2022,Liberia,Longitudinal cohort study (secondary analysis of PREVAIL III; NCT02431923),JBI Prevalence,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,9/9,Low,
+S12,LaVergne,2020,Sierra Leone,Cross-sectional immunological study,JBI Prevalence,Unclear,Unclear,No,Yes,Yes,Unclear,Unclear,Yes,Unclear,3/9,High,
+S13,Schindell,2024,Sierra Leone,Cross-sectional survey,JBI Prevalence,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Unclear,6/9,Moderate,
+S14,Shantha,2021,Sierra Leone,Prospective interventional cohort study (protocol-driven EBOV RNA testing pre-cataract surgery),MINORS,Unclear,Unclear,Unclear,Yes,Yes,Yes,Yes,Unclear,Unclear,4 (MINORS),Moderate,Scored with JBI 9-item items but tool should be MINORS; apply the proper MINORS instrument
+S15,Steptoe,2020,Sierra Leone,Prospective observational cohort study with 1-year follow-up (re-examination of previously studied symptomatic EVD survivors),JBI Prevalence,No,Unclear,Unclear,Yes,Yes,Yes,Yes,Yes,Yes,6/9,Moderate,
+S16,Taraborelli,2023,Sierra Leone,Prospective cohort study; sub-analysis of EVICT study assessing cataract surgery outcomes and vision-related quality of life in EVD survivors,MINORS,Yes,Unclear,No,Yes,Yes,Yes,Yes,Yes,Unclear,6 (MINORS),Moderate,Scored with JBI 9-item items but tool should be MINORS; apply the proper MINORS instrument
+S17,Tiffany,2016,Sierra Leone,Prospective cohort study using routinely collected MSF survivor clinic data,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,Yes,Yes,Yes,Yes,8/9,Moderate,
+S18,Fitzgerald,2018,Sierra Leone,Retrospective multicenter cohort study; pediatric EVD triage/case-definition predictive score development in acute-phase EHU admissions; NOT an EVD ocular complications or survivor follow-up study,JBI Prevalence,Yes,Yes,Yes,Yes,Yes,No,Unclear,Yes,Unclear,6/9,Moderate,Q6/Q7 scored 'No': no ophthalmic examination (self-report/none) — ocular condition not validly/reliably measured
+S19,Guetiya,2017,Sierra Leone,Cross-sectional survey within a survivor cohort (mobile health clinic observational study),JBI Prevalence,Yes,Unclear,Unclear,Yes,Unclear,No,No,Yes,Unclear,3/9,High,
+S20,Mattia,2016,Sierra Leone,cross-sectional,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,Yes,Unclear,Yes,Yes,7/9,Moderate,
+S21,Wing,2018,Sierra Leone,historical cohort,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,No,Unclear,Yes,Yes,6/9,Moderate,
+S22,Eghrari,2021,Liberia,prospective cohort,MINORS,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,8 (MINORS),Low,Scored with JBI 9-item items but tool should be MINORS; apply the proper MINORS instrument
+S23,Fashina,2024,Sierra Leone,post-hoc retrospective cross-sectional analysis,JBI Prevalence,No,No,Unclear,Yes,Yes,Yes,Unclear,Yes,Unclear,4/9,High,
+S24,Fashina,2023,Sierra Leone,post-hoc retrospective cross-sectional analysis (conference abstract),JBI Prevalence,Unclear,Unclear,Unclear,Yes,Yes,Yes,Unclear,Yes,Unclear,4/9,High,
+S25,Green,2016,Sierra Leone,cross-sectional cohort study,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,No,No,Yes,Yes,6/9,Low,Q6/Q7 scored 'No': no ophthalmic examination (self-report/none) — ocular condition not validly/reliably measured | Overall RoB reflects general study conduct; study reports no per-survivor ocular disease outcomes and is not pooled
+S26,Hereth,2017,Guinea,Prospective observational multicenter cohort study,JBI Prevalence,Yes,Unclear,Unclear,Yes,Yes,Yes,Yes,Yes,Unclear,6/9,Moderate,
+S27,Howlett,2018,Sierra Leone,Prospective observational case series of neurologic sequelae (neurologically-selected sub-cohort from a survivor clinic; ophthalmology performed as secondary assessment in specialist clinic subset only),JBI Prevalence,Unclear,No,No,Yes,Unclear,Unclear,Yes,Yes,Unclear,3/9,High,
+S28,Jagadesh,2018,Sierra Leone,Retrospective case-controlled cohort study,NOS,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Unclear,8 (NOS),Low,Q6/Q7 scored 'No': no ophthalmic examination (self-report/none) — ocular condition not validly/reliably measured | Scored with JBI 9-item items but tool should be NOS; apply the proper NOS instrument | Overall RoB reflects general study conduct; study reports no per-survivor ocular disease outcomes and is not pooled
+S29,Kangbai,2019,Sierra Leone,Observational retrospective study,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,No,No,Yes,Yes,6/9,Moderate,
+S30,Kulkarni,2026,Liberia,cross-sectional,JBI Prevalence,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,9/9,Low,
+S31,Mattia,2016,Sierra Leone,Retrospective review (conference abstract; ARVO Annual Meeting 2016),JBI Prevalence,Unclear,Unclear,Unclear,Unclear,Yes,Yes,Unclear,Yes,Unclear,3/9,High,
+S32,Mudalegundi,2023,Liberia,Longitudinal cohort study,JBI Prevalence,Yes,Unclear,Unclear,Yes,Yes,Yes,Yes,Yes,Yes,7/9,Low,
+S33,Shantha,2017,Liberia,cross-sectional,JBI Prevalence,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Unclear,6/9,Moderate,
+S34,Shantha,2019,Liberia,Cross-sectional screening study (clinic development report),JBI Prevalence,Unclear,No,No,Unclear,Unclear,Yes,Yes,Unclear,Unclear,2/9,High,
+S35,Steptoe,2018,Sierra Leone,Prospective case series,JBI Prevalence,No,No,No,Yes,Yes,Yes,Yes,Yes,Unclear,5/9,Moderate,
+S36,Steptoe,2017,Sierra Leone,Prospective case-control,NOS,No,No,Unclear,Yes,Yes,Yes,Yes,Yes,Unclear,5 (NOS),Moderate,Scored with JBI 9-item items but tool should be NOS; apply the proper NOS instrument
+S37,Tozay,2020,Liberia,Longitudinal observational cohort,JBI Prevalence,Yes,Unclear,Unclear,Yes,Yes,No,No,Yes,Unclear,4/9,High,
+S38,Van Nguyen,2023,Sierra Leone,Post-hoc retrospective cross-sectional chart review (sub-analysis of EVICT study cohort),JBI Prevalence,Yes,Unclear,Unclear,Unclear,Yes,Yes,Unclear,Yes,Unclear,4/9,High,
+S39,Vandy,2018,Sierra Leone,Retrospective programmatic cohort,JBI Prevalence,Yes,Unclear,No,Yes,Yes,Yes,Unclear,Yes,Unclear,5/9,Moderate,
+S40,Vandy,2016,Sierra Leone,Retrospective clinical cohort (baseline cross-sectional analysis),JBI Prevalence,Unclear,Unclear,No,Yes,Yes,Yes,Unclear,Yes,No,4/9,Moderate,
+S41,de Vet,2018,Liberia,Retrospective chart review,JBI Prevalence,No,Unclear,No,Yes,Yes,No,No,Yes,Unclear,3/9,High,
+S42,Eghrari,2015,Liberia,Baseline cross-sectional analysis within a 5-year prospective longitudinal cohort study (PREVAIL III eye substudy),JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,Yes,Yes,Yes,Unclear,7/9,Low,
+S43,Hartley,2024,Sierra Leone,Prospective case series; secondary analysis of EVICT study cataract surgery cohort with 12-month follow-up and histopathology,MINORS,Yes,Unclear,No,Yes,Unclear,Yes,Unclear,Yes,No,5 (MINORS),Moderate,Scored with JBI 9-item items but tool should be MINORS; apply the proper MINORS instrument
+S44,Mwanza,2024,Democratic Republic of the Congo,Program implementation report with descriptive cross-sectional ophthalmic screening,JBI Prevalence,Yes,Unclear,No,Yes,No,Unclear,Unclear,No,Yes,3/9,High,
+S45,Mwanza,2025,Democratic Republic of the Congo,Case-control,NOS,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,5 (NOS),Moderate,Scored with JBI 9-item items but tool should be NOS; apply the proper NOS instrument
+S46,Muwonge,2025,Democratic Republic of the Congo,prospective cohort,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,No,Unclear,Yes,Yes,6/9,Moderate,
+S48,Kaweesa,2026,Uganda,cross-sectional,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,No,No,Yes,Yes,6/9,Moderate,Q6/Q7 scored 'No': no ophthalmic examination (self-report/none) — ocular condition not validly/reliably measured
+S49,Shantha,2018,Sierra Leone,Cross-sectional,JBI Prevalence,Unclear,No,Unclear,Yes,Yes,Yes,Yes,Yes,Yes,6/9,Moderate,
+S50,Berry,2021,Sierra Leone,Cross-sectional (post-hoc secondary analysis of EVICT study baseline data),JBI Prevalence,No,No,Unclear,Yes,Yes,Yes,Yes,Yes,Unclear,5/9,Moderate,
+S51,Li,2018,,Commentary,JBI Prevalence,,,,,,,,,,—,Unclear (commentary),
+S52,Dyal,2023,Liberia,Case-case study,JBI Prevalence,Yes,No,No,Yes,Yes,Unclear,Unclear,Yes,Yes,5/9,Moderate,
+S53,Eghrari,2016,Liberia,cross-sectional,JBI Prevalence,Yes,Unclear,Unclear,Unclear,Yes,Yes,Yes,Yes,Unclear,5/9,Unclear,
+S54,PREVAIL III Study Group,2019,Liberia,Prospective longitudinal cohort study with EVD survivors and close-contact controls,JBI Prevalence,Yes,Yes,Unclear,Yes,Yes,Yes,Yes,Yes,Yes,8/9,Low,

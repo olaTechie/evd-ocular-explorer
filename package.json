@@ -1,0 +1,19 @@
+{
+  "name": "evd-ocular-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive evidence explorer for a systematic review of ocular complications in Ebola virus disease survivors",
+  "scripts": {
+    "data": "node scripts/build-data.mjs",
+    "predev": "npm run data",
+    "dev": "next dev",
+    "prebuild": "npm run data",
+    "build": "next build",
+    "serve": "npx --yes serve out"
+  },
+  "dependencies": {
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
