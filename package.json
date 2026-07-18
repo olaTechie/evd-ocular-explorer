@@ -5,9 +5,10 @@
   "description": "Interactive evidence explorer for a systematic review of ocular complications in Ebola virus disease survivors",
   "scripts": {
     "data": "node scripts/build-data.mjs",
-    "predev": "npm run data",
+    "thumbs": "node scripts/build-thumbs.mjs",
+    "predev": "npm run data && npm run thumbs",
     "dev": "next dev",
-    "prebuild": "npm run data",
+    "prebuild": "npm run data && npm run thumbs",
     "build": "next build",
     "serve": "npx --yes serve out"
   },
@@ -15,5 +16,8 @@
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
   }
 }

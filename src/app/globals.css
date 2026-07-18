@@ -302,7 +302,7 @@ footer.site a { color: var(--text-soft); }
 .observatory { position: relative; isolation: isolate; }
 :root[data-theme="dark"] .observatory::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(120% 90% at 15% -8%, #161d29 0%, transparent 60%); pointer-events: none; }
 :root[data-theme="dark"] .observatory::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 26px 26px; -webkit-mask-image: radial-gradient(80% 70% at 30% 0%, #000 28%, transparent 82%); mask-image: radial-gradient(80% 70% at 30% 0%, #000 28%, transparent 82%); pointer-events: none; }
-.hero h1 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; }
+h1, h2 { font-family: var(--font-display); font-weight: 600; }
 .stat .big { font-family: var(--font-num); letter-spacing: -0.03em; }
 :root[data-theme="dark"] .stat .big { color: var(--tier1-bright); text-shadow: var(--glow-blue); }
 
@@ -339,3 +339,17 @@ footer.site a { color: var(--text-soft); }
   table.data td.detail-td { display: block; padding: 0; text-align: left; }
   table.data td.detail-td::before { content: none; }
 }
+
+/* figures: hover lift + lightbox fade/pop + prev-next (Task 10); ref-list hover (Task 9) */
+.fig-card { transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.fig-card:hover { transform: translateY(-2px); }
+:root[data-theme="dark"] .fig-card:hover { box-shadow: var(--shadow), 0 0 20px #4a9ed61a; }
+.lightbox { animation: lb-fade var(--dur) var(--ease); }
+.lightbox .box { position: relative; animation: lb-pop var(--dur) var(--ease-out); }
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lb-pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+.lb-nav { position: absolute; top: 38%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-strong); background: color-mix(in srgb, var(--surface) 82%, transparent); color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.lb-nav:hover { background: var(--surface-2); }
+.lb-nav.prev { left: 10px; }
+.lb-nav.next { right: 10px; }
+.ref-list li:hover { background: var(--surface-2); }

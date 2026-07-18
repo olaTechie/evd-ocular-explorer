@@ -16,9 +16,9 @@ export default function ReferencesPage() {
       <ul className="ref-list card" style={{ marginTop: 16, overflow: "hidden" }}>
         {references.map((r) => (
           <li key={r.id}>
-            <span className="rid">{r.id}</span>
+            <Link href={`/studies/?study=${r.id}`} className="rid" style={{ textDecoration: "none" }}>{r.id}</Link>
             <span>
-              <strong>{r.author}</strong>{r.year ? ` (${r.year})` : ""}.
+              <Link href={`/studies/?study=${r.id}`} style={{ color: "inherit" }}><strong>{r.author}</strong></Link>{r.year ? ` (${r.year})` : ""}.
               {r.journal ? <> <em>{r.journal}</em>.</> : null}
               {" "}
               <span className="faint">
