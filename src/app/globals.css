@@ -298,6 +298,21 @@ footer.site a { color: var(--text-soft); }
 .reveal.in { opacity: 1; transform: none; }
 .countup { font-variant-numeric: tabular-nums; }
 
+.observatory { position: relative; isolation: isolate; }
+:root[data-theme="dark"] .observatory::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(120% 90% at 15% -8%, #161d29 0%, transparent 60%); pointer-events: none; }
+:root[data-theme="dark"] .observatory::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 26px 26px; -webkit-mask-image: radial-gradient(80% 70% at 30% 0%, #000 28%, transparent 82%); mask-image: radial-gradient(80% 70% at 30% 0%, #000 28%, transparent 82%); pointer-events: none; }
+.hero h1 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; }
+.stat .big { font-family: var(--font-num); letter-spacing: -0.03em; }
+:root[data-theme="dark"] .stat .big { color: var(--tier1-bright); text-shadow: var(--glow-blue); }
+
+/* forest draw-in (staggered rows) + hover glow — .anim only added after hydration so SSR content stays visible */
+.forest-card.anim .forest-row { opacity: 0; transform: translateX(-6px); transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out); }
+.forest-card.anim.drawn .forest-row { opacity: 1; transform: none; transition-delay: calc(var(--i, 0) * 40ms); }
+.card.stat { transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.card.stat:hover { transform: translateY(-2px); }
+:root[data-theme="dark"] .card.stat:hover { box-shadow: var(--shadow), 0 0 22px #4a9ed61a; }
+:root[data-theme="dark"] .forest-row:hover { box-shadow: inset 0 0 0 1px var(--border), 0 0 18px #4a9ed61f; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

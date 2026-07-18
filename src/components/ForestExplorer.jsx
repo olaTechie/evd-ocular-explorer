@@ -1,13 +1,17 @@
 "use client";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useInView } from "@/lib/useInView";
 import { asset, fmtPct, fmtCI, tierColor, niceMax } from "@/lib/util";
 
-/* A prevalence "lane": CI line + prediction interval + point marker, all
-   absolutely positioned by percentage so markers never distort with width. */
-function Lane({ xmax, lo, hi, value, pi_lo, pi_hi, color, kind = "diamond", size = 12, ticks, h = 30 }) {
+/* A prevalence "lane". For pooled/subgroup rows the marker is a diamond whose
+   WIDTH spans the 95% CI (apex = point estimate) — the standard forest
+   convention. Study rows use a square sized by √n. All positioned by percentage
+   so markers never distort with width. */
+function Lane({ xmax, lo, hi, value, pi_lo, pi_hi, color, kind = "diamond", size = 12, ticks, h = 30, glow = "none" }) {
   const pos = (v) => `${Math.max(0, Math.min(100, (v / xmax) * 100))}%`;
-  const half = size / 2;
+  const ciDiamond = kind === "diamond" && lo != null && hi != null && hi > lo;
+  const apex = ciDiamond ? ((value - lo) / (hi - lo)) * 100 : 0;
   return (
     <div className="lane" style={{ position: "relative", height: h }}>
       {ticks?.map((t) => (
@@ -18,20 +22,29 @@ function Lane({ xmax, lo, hi, value, pi_lo, pi_hi, color, kind = "diamond", size
         <div style={{ position: "absolute", top: "50%", left: pos(pi_lo), width: `calc(${pos(pi_hi)} - ${pos(pi_lo)})`,
           height: 2, transform: "translateY(-50%)", background: color, opacity: 0.28 }} />
       )}
-      {lo != null && hi != null && (
+      {ciDiamond ? (
+        <div style={{ position: "absolute", top: "50%", left: pos(lo), width: `calc(${pos(hi)} - ${pos(lo)})`,
+          height: size, transform: "translateY(-50%)", background: color,
+          clipPath: `polygon(0 50%, ${apex}% 0, 100% 50%, ${apex}% 100%)`, boxShadow: glow }} />
+      ) : (
         <>
-          <div style={{ position: "absolute", top: "50%", left: pos(lo), width: `calc(${pos(hi)} - ${pos(lo)})`,
-            height: 2, transform: "translateY(-50%)", background: color, opacity: 0.7 }} />
-          {[lo, hi].map((c, i) => (
-            <div key={i} style={{ position: "absolute", top: "50%", left: pos(c), width: 2, height: size * 0.7,
-              transform: "translate(-50%,-50%)", background: color, opacity: 0.7 }} />
-          ))}
+          {lo != null && hi != null && (
+            <>
+              <div style={{ position: "absolute", top: "50%", left: pos(lo), width: `calc(${pos(hi)} - ${pos(lo)})`,
+                height: 2, transform: "translateY(-50%)", background: color, opacity: 0.7 }} />
+              {[lo, hi].map((c, i) => (
+                <div key={i} style={{ position: "absolute", top: "50%", left: pos(c), width: 2, height: size * 0.7,
+                  transform: "translate(-50%,-50%)", background: color, opacity: 0.7 }} />
+              ))}
+            </>
+          )}
+          {value != null && (
+            <div style={{ position: "absolute", top: "50%", left: pos(value), width: size, height: size,
+              transform: `translate(-50%,-50%) rotate(${kind === "diamond" ? 45 : 0}deg)`,
+              background: color, borderRadius: 2,
+              boxShadow: glow !== "none" ? glow : "0 0 0 1px rgba(0,0,0,0.15)" }} />
+          )}
         </>
-      )}
-      {value != null && (
-        <div style={{ position: "absolute", top: "50%", left: pos(value), width: size, height: size,
-          transform: `translate(-50%,-50%) rotate(${kind === "diamond" ? 45 : 0}deg)`,
-          background: color, borderRadius: 2, boxShadow: "0 0 0 1px rgba(0,0,0,0.12)" }} />
       )}
     </div>
   );
@@ -83,7 +96,7 @@ function Detail({ o, xmax, ticks }) {
               {g.rows.map((r, i) => (
                 <div className="mini-row" key={i}>
                   <span className="mlbl">{r.group} <span className="faint">(k={r.k})</span></span>
-                  <Lane xmax={xmax} value={r.pct} lo={r.ci_lo} hi={r.ci_hi} color={tierColor(o.tier)} kind="diamond" ticks={ticks} h={18} size={11} />
+                  <Lane xmax={xmax} value={r.pct} lo={r.ci_lo} hi={r.ci_hi} color={tierColor(o.tier)} kind="diamond" ticks={ticks} h={18} size={11} glow={o.tier === 1 ? "var(--glow-blue)" : "var(--glow-orange)"} />
                   <span className="mini-val">{fmtPct(r.pct)} <span className="faint">({fmtCI(r.ci_lo, r.ci_hi)})</span></span>
                 </div>
               ))}
@@ -98,6 +111,9 @@ function Detail({ o, xmax, ticks }) {
 export default function ForestExplorer({ outcomes }) {
   const [tier, setTier] = useState(0); // 0 = all
   const [open, setOpen] = useState(null);
+  const [forestRef, forestIn] = useInView();
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
 
   const xmax = useMemo(() => niceMax(Math.max(...outcomes.map((o) => o.ci_hi)), 10), [outcomes]);
   const ticks = useMemo(() => Array.from({ length: xmax / 10 + 1 }, (_, i) => i * 10), [xmax]);
@@ -117,7 +133,7 @@ export default function ForestExplorer({ outcomes }) {
         <span className="faint" style={{ fontSize: "0.82rem" }}>Click a row for studies &amp; subgroups</span>
       </div>
 
-      <div className="card pad">
+      <div ref={forestRef} className={`card pad forest-card${hydrated ? " anim" : ""}${forestIn ? " drawn" : ""}`}>
         <div className="axis-strip">
           <div className="faint" style={{ fontSize: "0.76rem" }}>Outcome</div>
           <div style={{ position: "relative", height: 16 }}>
@@ -130,11 +146,11 @@ export default function ForestExplorer({ outcomes }) {
           <div className="faint" style={{ fontSize: "0.76rem", textAlign: "right" }}>Pooled (95% CI)</div>
         </div>
 
-        {rows.map((o) => {
+        {rows.map((o, i) => {
           const isOpen = open === o.outcome;
           return (
             <div key={o.outcome}>
-              <div className={`forest-row${isOpen ? " open" : ""}`} onClick={() => setOpen(isOpen ? null : o.outcome)}
+              <div className={`forest-row${isOpen ? " open" : ""}`} style={{ "--i": i }} onClick={() => setOpen(isOpen ? null : o.outcome)}
                 role="button" tabIndex={0}
                 onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setOpen(isOpen ? null : o.outcome))}>
                 <div className="forest-label">
@@ -143,7 +159,8 @@ export default function ForestExplorer({ outcomes }) {
                   <span className={`badge t${o.tier}`}>T{o.tier}</span>
                 </div>
                 <Lane xmax={xmax} value={o.pct} lo={o.ci_lo} hi={o.ci_hi} pi_lo={o.pi_lo} pi_hi={o.pi_hi}
-                  color={tierColor(o.tier)} ticks={ticks} h={30} size={13} />
+                  color={tierColor(o.tier)} ticks={ticks} h={30} size={13}
+                  glow={o.tier === 1 ? "var(--glow-blue)" : "var(--glow-orange)"} />
                 <div className="forest-stat">
                   <div className="val">{fmtPct(o.pct)}</div>
                   <div className="sub">{fmtCI(o.ci_lo, o.ci_hi)} · k={o.k} · I²={Math.round(o.i2)}%</div>
@@ -155,8 +172,9 @@ export default function ForestExplorer({ outcomes }) {
         })}
       </div>
       <p className="count-note">
-        Diamond = pooled prevalence; whisker = 95% CI; faint bar = 95% prediction interval. Squares in the expanded
-        view are individual studies, sized by number examined. Prevalence via Freeman–Tukey / DerSimonian–Laird.
+        The diamond spans the 95% CI (its apex marks the pooled prevalence); the faint bar is the 95% prediction
+        interval. Squares in the expanded view are individual studies, sized by number examined. Prevalence via
+        Freeman–Tukey / DerSimonian–Laird.
       </p>
     </div>
   );
