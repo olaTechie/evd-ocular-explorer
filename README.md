@@ -42,18 +42,13 @@ Requires Node 18+ (CI uses Node 20).
 
 ## Deploy
 
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds and publishes `./out` to GitHub Pages. One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+Every push to `main` runs `.github/workflows/deploy.yml`, which builds the static export and publishes `./out` to GitHub Pages. The workflow enables Pages automatically (`actions/configure-pages`), so no manual settings step is needed.
+
+**Live at https://olatechie.github.io/evd-ocular-explorer/**
 
 The project is served under a base path (`/evd-ocular-explorer`) in production; `next.config.mjs` handles this automatically and `public/.nojekyll` keeps Pages from stripping the `_next` assets.
 
-### Launch gating (important)
-
-The companion is intended to go live **only after the parent article is accepted**, to avoid deanonymising a blinded submission and any prior-publication concerns. Until then:
-
-- keep the repository **private**, and
-- keep **GitHub Pages disabled** (Settings → Pages → None).
-
-While Pages is disabled the deploy job fails harmlessly. When the paper is accepted, make the repo public, enable Pages (Source: GitHub Actions), re-run the workflow, and add the URL to the manuscript at proof stage.
+> Note: this is a public companion hosted under the author's GitHub account. If the parent article is under double-blind review, the live site links the authors to the submission.
 
 ## Disclosure
 
