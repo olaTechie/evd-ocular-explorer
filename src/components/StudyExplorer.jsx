@@ -37,10 +37,19 @@ export default function StudyExplorer({ studies }) {
   const [sort, setSort] = useState({ k: "author", dir: 1 });
   const [openId, setOpenId] = useState(null);
 
-  // Deep-link support: /studies/?outcome=<name> arrives from the forest explorer.
+  // Deep-link support: ?outcome=<name> (from the forest) and ?study=<id> (from References).
   useEffect(() => {
-    const p = new URLSearchParams(window.location.search).get("outcome");
-    if (p) setOutcome(p);
+    const params = new URLSearchParams(window.location.search);
+    const oc = params.get("outcome");
+    if (oc) setOutcome(oc);
+    const st = params.get("study");
+    if (st) {
+      setOpenId(st);
+      requestAnimationFrame(() => {
+        const el = document.getElementById(`study-${st}`);
+        el?.scrollIntoView({ block: "center", behavior: "smooth" });
+      });
+    }
   }, []);
 
   const opts = useMemo(
@@ -111,7 +120,15 @@ export default function StudyExplorer({ studies }) {
           <thead>
             <tr>
               {COLS.map((c) => (
-                <th key={c.k} onClick={() => toggleSort(c.k)} className={c.num ? "num" : ""}>
+                <th
+                  key={c.k}
+                  onClick={() => toggleSort(c.k)}
+                  className={c.num ? "num" : ""}
+                  tabIndex={0}
+                  role="button"
+                  aria-sort={sort.k === c.k ? (sort.dir > 0 ? "ascending" : "descending") : "none"}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleSort(c.k); } }}
+                >
                   {c.label} <span className="arrow">{sort.k === c.k ? (sort.dir > 0 ? "▲" : "▼") : "⇅"}</span>
                 </th>
               ))}
@@ -137,20 +154,28 @@ export default function StudyExplorer({ studies }) {
 function FragmentRow({ s, open, onToggle }) {
   return (
     <>
-      <tr className={open ? "open" : ""} onClick={onToggle}>
-        <td><strong>{s.author}</strong> {s.year} <span className="faint" style={{ fontFamily: "var(--mono)", fontSize: "0.75rem" }}>{s.id}</span></td>
-        <td>{s.country || "—"}</td>
-        <td>{s.outbreak || "—"}</td>
-        <td>{s.species || "—"}</td>
-        <td>{s.design || "—"}</td>
-        <td className="num">{s.n_eye_exam ?? "—"}</td>
-        <td>{s.examiner || "—"}</td>
-        <td><span className={`pill ${robToken(s.rob)}`}>{s.rob || "—"}</span></td>
-        <td className="num">{s.outcomes.length}</td>
+      <tr
+        id={`study-${s.id}`}
+        className={open ? "open" : ""}
+        onClick={onToggle}
+        tabIndex={0}
+        role="button"
+        aria-expanded={open}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onToggle(); } }}
+      >
+        <td data-label="Study"><strong>{s.author}</strong> {s.year} <span className="faint" style={{ fontFamily: "var(--mono)", fontSize: "0.75rem" }}>{s.id}</span></td>
+        <td data-label="Country">{s.country || "—"}</td>
+        <td data-label="Outbreak">{s.outbreak || "—"}</td>
+        <td data-label="Species">{s.species || "—"}</td>
+        <td data-label="Design">{s.design || "—"}</td>
+        <td data-label="N exam" className="num">{s.n_eye_exam ?? "—"}</td>
+        <td data-label="Examiner">{s.examiner || "—"}</td>
+        <td data-label="RoB"><span className={`pill ${robToken(s.rob)}`}>{s.rob || "—"}</span></td>
+        <td data-label="Outcomes" className="num">{s.outcomes.length}</td>
       </tr>
       {open && (
         <tr className="detail-cell">
-          <td colSpan={9}>
+          <td colSpan={9} className="detail-td">
             <div style={{ padding: "6px 4px 12px" }}>
               <div className="kv">
                 {s.journal && <div><b>Journal:</b> {s.journal}</div>}

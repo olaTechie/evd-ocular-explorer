@@ -202,7 +202,8 @@ input.search, select.select {
   border: 1px solid var(--border-strong); background: var(--surface); color: var(--text);
   border-radius: 9px; padding: 8px 12px; font-size: 0.9rem; font-family: inherit;
 }
-input.search { min-width: 240px; flex: 1 1 240px; }
+input.search { flex: 1 1 260px; max-width: 380px; }
+select.select { flex: 0 0 auto; }
 input.search:focus, select.select:focus { outline: 2px solid var(--tier1-soft); border-color: var(--tier1); }
 
 /* ---- table ---- */
@@ -320,4 +321,21 @@ footer.site a { color: var(--text-soft); }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Study table → stacked cards on mobile (Task 8) */
+@media (max-width: 680px) {
+  .table-wrap { overflow: visible; border: 0; }
+  table.data thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.data, table.data tbody { display: block; width: 100%; }
+  table.data tr { display: block; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); margin-bottom: 8px; padding: 2px 2px 6px; }
+  table.data tr.detail-cell { border: 0; background: transparent; margin: -6px 0 10px; padding: 0; }
+  table.data tbody tr:hover { background: var(--surface); }
+  table.data tbody tr.open { background: var(--tier1-soft); }
+  table.data td { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; border: 0; padding: 5px 12px; white-space: normal; text-align: right; }
+  table.data td::before { content: attr(data-label); color: var(--text-faint); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; text-align: left; flex: 0 0 auto; padding-top: 2px; }
+  table.data td:first-child { display: block; text-align: left; font-size: 1.02rem; padding: 8px 12px 5px; border-bottom: 1px solid var(--border); margin-bottom: 3px; }
+  table.data td:first-child::before { content: none; }
+  table.data td.detail-td { display: block; padding: 0; text-align: left; }
+  table.data td.detail-td::before { content: none; }
 }
