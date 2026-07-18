@@ -1,8 +1,7 @@
 name: Deploy to GitHub Pages
 
-# NOTE: Keep the repository PRIVATE and GitHub Pages DISABLED until the parent
-# article is accepted (see README → "Launch gating"). While Pages is disabled
-# the deploy job simply fails harmlessly; enable Pages when you are ready to go live.
+# On every push to main: build the static export and publish it to GitHub Pages.
+# `configure-pages` (enablement: true) turns Pages on automatically the first time.
 
 on:
   push:
@@ -27,8 +26,12 @@ jobs:
         with:
           node-version: "20"
           cache: npm
+      - name: Enable & configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - run: npm ci
-      - run: npm run build   # runs the CSV→JSON step, then `next build` (static export to ./out)
+      - run: npm run build   # prebuild runs CSV→JSON + thumbnails, then next build → ./out
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
