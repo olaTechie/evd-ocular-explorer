@@ -1,4 +1,5 @@
 import "./globals.css";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 
 export const metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({ children }) {
             <p style={{ margin: 0 }} className="faint">
               Prevalence estimates use Freeman–Tukey double-arcsine transformation with DerSimonian–Laird random
               effects. This tool summarises published data; it is not medical advice. Built with assistance from an AI
-              coding tool — see <a href="/about/">About</a>.
+              coding tool — see <Link href="/about/">About</Link>.
             </p>
           </div>
         </footer>

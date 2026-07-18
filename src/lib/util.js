@@ -12,6 +12,7 @@ export const tierLabel = (t) =>
 /** Map a risk-of-bias rating to a CSS class token. */
 export const robToken = (r) => {
   const s = (r || "").toLowerCase();
+  if (s.includes("low") && s.includes("mod")) return "mod"; // "Low-Moderate" → amber, not green
   if (s.startsWith("low")) return "low";
   if (s.startsWith("mod")) return "mod";
   if (s.startsWith("high") || s.startsWith("serious") || s.startsWith("crit")) return "high";
