@@ -1,7 +1,24 @@
+@font-face{font-family:"Fraunces";src:url("/fonts/fraunces-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Fraunces";src:url("/fonts/fraunces-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url("/fonts/space-grotesk-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url("/fonts/space-grotesk-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+
 :root {
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-num: "Space Grotesk", ui-monospace, "SF Mono", system-ui, sans-serif;
+  --dur-fast: 150ms;
+  --dur: 260ms;
+  --dur-slow: 520ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease: cubic-bezier(.4, 0, .2, 1);
+  --grid: transparent;
+  --tier1-bright: var(--tier1);
+  --tier2-bright: var(--tier2);
+  --glow-blue: none;
+  --glow-orange: none;
   --tier1: #1a6ea8;
   --tier1-soft: #1a6ea822;
-  --tier2: #b5651d;
+  --tier2: #a05716;
   --tier2-soft: #b5651d22;
 
   --bg: #f7f7f5;
@@ -11,7 +28,7 @@
   --border-strong: #cfd2d8;
   --text: #1c2024;
   --text-soft: #5a6169;
-  --text-faint: #8b929b;
+  --text-faint: #67707a;
   --accent: var(--tier1);
   --shadow: 0 1px 2px rgba(17, 24, 39, 0.06), 0 4px 16px rgba(17, 24, 39, 0.05);
 
@@ -242,4 +259,41 @@ footer.site a { color: var(--text-soft); }
   .forest-stat { text-align: left; }
   .nav-links a { padding: 6px 9px; font-size: 0.86rem; }
   .brand small { display: none; }
+}
+
+/* ---- observatory: dark depth + glow, global focus, reduced-motion (Task 3) ---- */
+:root[data-theme="dark"] {
+  --bg: #0a0d13;
+  --surface: #141a24;
+  --surface-2: #1b2130;
+  --grid: #ffffff0a;
+  --tier1-bright: #8ccff6;
+  --tier2-bright: #e8a765;
+  --glow-blue: 0 0 22px #4a9ed655;
+  --glow-orange: 0 0 22px #d98b4555;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a0d13;
+    --surface: #141a24;
+    --surface-2: #1b2130;
+    --grid: #ffffff0a;
+    --tier1-bright: #8ccff6;
+    --tier2-bright: #e8a765;
+    --glow-blue: 0 0 22px #4a9ed655;
+    --glow-orange: 0 0 22px #d98b4555;
+  }
+}
+:where(a, button, [role="button"], input, select, summary, .forest-row, .fig-card, table.data tbody tr, table.data thead th):focus-visible {
+  outline: 2px solid var(--tier1);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
