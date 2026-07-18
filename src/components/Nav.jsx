@@ -16,7 +16,7 @@ function ThemeToggle() {
   useEffect(() => {
     const saved = localStorage.getItem("theme");
     if (saved) document.documentElement.setAttribute("data-theme", saved);
-    setTheme(saved || "auto");
+    setTheme(saved || "dark");
   }, []);
   const cycle = () => {
     const next = theme === "dark" ? "light" : "dark";
