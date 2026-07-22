@@ -246,8 +246,36 @@ const figures = figFiles.map(describeFigure);
 // ---------------------------------------------------------------------------
 // 4) references.json — bibliography of the 53 included studies
 // ---------------------------------------------------------------------------
+// Full bibliographic records resolved from the screening library (potentially_relevant.ris)
+// and keyed by study id. See data/included_53_citations.csv for the audit trail.
+const citeRows = readTable("included_53_citations.csv");
+const citeById = new Map(citeRows.map((c) => [c.study_id, c]));
+
+// "Surname AB; Surname CD; ..." -> Vancouver-style display list (first 3 + et al)
+function authorList(s) {
+  const all = (s || "").split(";").map((a) => a.trim()).filter(Boolean);
+  if (!all.length) return "";
+  return all.length <= 3 ? all.join(", ") : `${all.slice(0, 3).join(", ")}, et al`;
+}
+
 const references = studies
-  .map((s) => ({ id: s.id, author: s.author, year: s.year, journal: s.journal, country: s.country, species: s.species, design: s.design, pooled: s.pooled }))
+  .map((s) => {
+    const c = citeById.get(s.id) || {};
+    const vol = c.volume ? `;${c.volume}${c.issue ? `(${c.issue})` : ""}${c.pages ? `:${c.pages}` : ""}` : "";
+    const citation = c.title
+      ? `${authorList(c.authors)}. ${c.title}.${c.journal ? ` ${c.journal}.` : ""}${c.year ? ` ${c.year}` : ""}${vol}.`
+      : null;
+    return {
+      id: s.id, author: s.author, year: c.year || s.year,
+      journal: c.journal || s.journal || null,
+      country: s.country, species: s.species, design: s.design, pooled: s.pooled,
+      authors: c.authors || null, title: c.title || null,
+      volume: c.volume || null, issue: c.issue || null, pages: c.pages || null,
+      doi: c.doi || null, pmid: c.pmid || null,
+      record_type: c.record_type || null,
+      citation,
+    };
+  })
   .sort((a, b) => (a.author || "").localeCompare(b.author || ""));
 
 // ---------------------------------------------------------------------------
