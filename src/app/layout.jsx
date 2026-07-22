@@ -29,8 +29,8 @@ export default function RootLayout({ children }) {
             </p>
             <p style={{ margin: 0 }} className="faint">
               Prevalence estimates use Freeman–Tukey double-arcsine transformation with DerSimonian–Laird random
-              effects. This tool summarises published data; it is not medical advice. Built with assistance from an AI
-              coding tool — see <Link href="/about/">About</Link>.
+              effects. This tool summarises published data; it is not medical advice. See{" "}
+              <Link href="/about/">About</Link>.
             </p>
           </div>
         </footer>

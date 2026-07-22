@@ -48,14 +48,6 @@ export default function AboutPage() {
         <li>Subgroup strata (outbreak era, species, examiner, timing) are often small and should be read as descriptive, not as formal comparisons.</li>
       </ul>
 
-      <h2>AI-assistance disclosure</h2>
-      <p>
-        This explorer&apos;s code and data-transformation pipeline were produced with the assistance of an AI coding
-        tool, under author direction and review. No estimates are AI-generated: all numbers are computed by the
-        published R analysis and passed through a deterministic transform to JSON. The AI does not answer questions at
-        runtime.
-      </p>
-
       <h2>Citing this tool</h2>
       <p className="muted">
         A permanent citation and DOI will be added on publication of the parent article. Until then, please cite the
