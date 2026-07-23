@@ -90,6 +90,7 @@ function Detail({ o, xmax, ticks }) {
       {grouped.length > 0 && (
         <div className="subgroup-block">
           <h5>Subgroup estimates (random-effects pooled)</h5>
+          {o.subgroup_caveat && <p className="caveat">{o.subgroup_caveat}</p>}
           {grouped.map((g) => (
             <div key={g.v} style={{ marginBottom: 8 }}>
               <div className="faint" style={{ fontSize: "0.76rem", margin: "6px 0 2px" }}>{g.label}</div>

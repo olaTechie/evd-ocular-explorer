@@ -149,6 +149,36 @@ const plainFor = (outcome, pct, k) => {
   const oneIn = pct > 0 ? Math.round(100 / pct) : null;
   return t.replace(/%PCT%/g, `${(+pct).toFixed(1)}%`).replace(/%ONEIN%/g, oneIn ?? "—").replace(/%K%/g, k);
 };
+// For some outcomes the ophthalmologist stratum contains exactly the studies in the
+// post-2016 stratum, so the examiner and era panels are the same comparison and an
+// ascertainment reading cannot be told apart from a period effect. Detect that here
+// rather than letting the identical numbers read as two concordant findings.
+function collinearityNote(subs, studies) {
+  // Only worth flagging when the reader can actually see two strata per factor and at
+  // least one examiner row duplicates an era row — that is the misleading pattern.
+  const ex = subs.filter((s) => s.var === "examiner_bin");
+  const er = subs.filter((s) => s.var === "era_grp");
+  if (ex.length < 2 || er.length < 2) return null;
+  const same = (a, b) => a.k === b.k && a.pct === b.pct && a.ci_lo === b.ci_lo && a.ci_hi === b.ci_hi;
+  if (!ex.some((a) => er.some((b) => same(a, b)))) return null;
+
+  // Confirm the duplication really is one study set reported twice.
+  const ids = (f) => studies.filter(f).map((s) => s.study_id).sort().join(",");
+  const oph = ids((s) => s.examiner === "Ophthalmologist");
+  const oth = ids((s) => s.examiner !== "Ophthalmologist");
+  const post = ids((s) => s.era === "Post-2016");
+  const wa = ids((s) => s.era === "2014-2016");
+  if (oph !== post) return null;
+  const both = oth && oth === wa;
+  return (
+    `Examiner type and outbreak era are ${both ? "perfectly " : ""}confounded for this outcome: ` +
+    `the ophthalmologist studies are exactly the post-2016 studies` +
+    (both ? ", and the other/unclear studies are exactly the 2014–2016 studies" : "") +
+    `. The identical rows below are one comparison reported twice, so an ascertainment effect ` +
+    `cannot be distinguished from a period effect.`
+  );
+}
+
 const outcomes = pooled.map((r) => {
   const studies = (contribByOutcome[r.outcome] || []).sort((a, b) => b.prevalence - a.prevalence);
   const eraFig = FIG_ERA[r.outcome] ? `eFigure_forest_${FIG_ERA[r.outcome]}_by_era.png` : null;
@@ -159,6 +189,7 @@ const outcomes = pooled.map((r) => {
     n_total: studies.reduce((s, x) => s + x.n_examined, 0),
     plain: plainFor(r.outcome, num(r.pool_pct), num(r.k)),
     subgroups: subgByOutcome[r.outcome] || [],
+    subgroup_caveat: collinearityNote(subgByOutcome[r.outcome] || [], studies),
     studies,
     era_figure: eraFig && fs.existsSync(path.join(FIG, eraFig)) ? eraFig : null,
   };
