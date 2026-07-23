@@ -165,7 +165,7 @@ const outcomes = pooled.map((r) => {
 });
 
 // ---------------------------------------------------------------------------
-// 2) studies.json — 53 studies (appendix1) + RoB detail + outcomes contributed
+// 2) studies.json — 52 studies (appendix1) + RoB detail + outcomes contributed
 // ---------------------------------------------------------------------------
 const robById = Object.fromEntries(rob.map((r) => [r.Study_ID, r]));
 const outcomesByStudy = {};
@@ -237,18 +237,18 @@ function describeFigure(f) {
     "funnel_plots": { type: "Funnel plot", group: "Diagnostics", outcome: "Publication bias", tier: null, caption: "Funnel plots for small-study effects." },
     "leaveoneout_plots": { type: "Leave-one-out", group: "Diagnostics", outcome: "Influence", tier: null, caption: "Leave-one-out sensitivity." },
     "reml_metaregression_figure": { type: "Meta-regression", group: "Diagnostics", outcome: "Examiner gradient", tier: null, caption: "REML meta-regression of uveitis prevalence on examiner type." },
-    "prisma_flow_figure": { type: "PRISMA flow", group: "Overview", outcome: "Study selection", tier: null, caption: "PRISMA 2020 flow diagram: 53 included studies." },
+    "prisma_flow_figure": { type: "PRISMA flow", group: "Overview", outcome: "Study selection", tier: null, caption: "PRISMA 2020 flow diagram: 52 included studies." },
   };
   return { file: f, ...(STATIC[base] || { type: "Figure", group: "Other", outcome: base, tier: null, caption: base }) };
 }
 const figures = figFiles.map(describeFigure);
 
 // ---------------------------------------------------------------------------
-// 4) references.json — bibliography of the 53 included studies
+// 4) references.json — bibliography of the 52 included studies
 // ---------------------------------------------------------------------------
 // Full bibliographic records resolved from the screening library (potentially_relevant.ris)
-// and keyed by study id. See data/included_53_citations.csv for the audit trail.
-const citeRows = readTable("included_53_citations.csv");
+// and keyed by study id. See data/included_52_citations.csv for the audit trail.
+const citeRows = readTable("included_52_citations.csv");
 const citeById = new Map(citeRows.map((c) => [c.study_id, c]));
 
 // "Surname AB; Surname CD; ..." -> Vancouver-style display list (first 3 + et al)
@@ -289,7 +289,7 @@ const meta_summary = {
   n_tier2: outcomes.length - t1c.length,
   n_survivors_examined: Math.max(...studies.map((s) => s.n_eye_exam || 0)),
   headline: t1c.map((o) => ({ outcome: o.outcome, pct: o.pct, ci_lo: o.ci_lo, ci_hi: o.ci_hi, k: o.k })),
-  generated_from: "meta_clean_corrected.csv (86 rows) · appendix1 (53) · appendix2 (53) · pooled/subgroup corrected",
+  generated_from: "meta_clean_corrected.csv (86 rows) · appendix1 (52) · appendix2 (52) · pooled/subgroup corrected",
 };
 
 // ---------------------------------------------------------------------------
